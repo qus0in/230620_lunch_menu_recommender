@@ -51,11 +51,14 @@ def main():
                 # 메뉴 이미지 검색 및 표시
                 image_urls = search_menu_images(menu, client_id, client_secret, num_images=5)
                 if image_urls:
-                    image_columns = st.beta_columns(len(image_urls))
+                    image_columns = st.columns(len(image_urls))
                     for i, image_url in enumerate(image_urls):
-                        image = Image.open(requests.get(image_url, stream=True).raw)
-                        with image_columns[i]:
-                            st.image(image, caption=menu, width=300)
+                        try:
+                            image = Image.open(requests.get(image_url, stream=True).raw)
+                            with image_columns[i]:
+                                st.image(image, caption=menu, width=300)
+                        except:
+                            st.error("이미지 로딩 중 오류가 발생했습니다.")
 
             st.write("---")
 
