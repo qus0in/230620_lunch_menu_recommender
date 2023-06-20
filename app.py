@@ -56,7 +56,7 @@ def main():
                         try:
                             image = Image.open(requests.get(image_url, stream=True).raw)
                             with image_columns[i]:
-                                st.image(image, caption=menu, width=300)
+                                st.image(image, caption=menu, use_contianer_with=True)
                         except:
                             st.error("이미지 로딩 중 오류가 발생했습니다.")
 
