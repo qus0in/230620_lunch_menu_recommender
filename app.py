@@ -51,9 +51,11 @@ def main():
                 # 메뉴 이미지 검색 및 표시
                 image_urls = search_menu_images(menu, client_id, client_secret, num_images=5)
                 if image_urls:
-                    for image_url in image_urls:
+                    image_columns = st.beta_columns(len(image_urls))
+                    for i, image_url in enumerate(image_urls):
                         image = Image.open(requests.get(image_url, stream=True).raw)
-                        st.image(image, caption=menu, width=300)
+                        with image_columns[i]:
+                            st.image(image, caption=menu, width=300)
 
             st.write("---")
 
